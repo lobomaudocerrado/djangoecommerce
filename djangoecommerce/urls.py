@@ -16,8 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from django.conf.urls import url
+from django.conf.urls import url, include
+
 from core import views
+from catalog import views as catalog_views
 
 urlpatterns = [
     # Forma antiga
@@ -28,8 +30,8 @@ urlpatterns = [
     #url(r'^contato/$', views.contact, name='contact'),
     path('contato/', views.contact, name='contact'),
     #url(r'^produtos/$', views.product_list, name='product_list'),
-    path('produto/', views.product, name='product'),
-    #url(r'^produto/$', views.product, name='product'),
-    path('produtos/', views.product_list, name='product_list'),
+    url(r'^catalogo/', include(('catalog.urls', 'catalog'), namespace='catalog')),
+    #path('produtos/', catalog_views.product_list, name='product_list'),
+
     path('admin/', admin.site.urls),
 ]
